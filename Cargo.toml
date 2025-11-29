@@ -1,6 +1,9 @@
-[package]
-name = "cmpt453"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+members = [
+    "main",
+    "grpc",
+    "rest",
+    "loadgen"
+]
 
-[dependencies]
+resolver = "2"
