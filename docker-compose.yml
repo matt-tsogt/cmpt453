@@ -1,0 +1,50 @@
+services:
+  grpc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["grpc"]
+    ports:
+      - "8080:8080"
+    networks:
+      - benchnet
+
+  rest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["rest"]
+    ports:
+      - "9090:9090"
+    networks:
+      - benchnet
+
+  rest_json:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["rest_json"]
+    ports:
+      - "10010:10010"
+    networks:
+      - benchnet
+
+  loadgen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["loadgen"]
+    environment:
+      GRPC_ENDPOINT: "http://grpc:8080"
+      REST_ENDPOINT: "http://rest:9090/ping"
+      REST_JSON_ENDPOINT: "http://rest_json:10010/ping"
+    depends_on:
+      - grpc
+      - rest
+      - rest_json
+    networks:
+      - benchnet
+
+networks:
+  benchnet:
+    driver: bridge

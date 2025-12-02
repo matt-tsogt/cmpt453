@@ -3,7 +3,8 @@ members = [
     "main",
     "grpc",
     "rest",
-    "loadgen"
+    "loadgen", 
+    "rest_json"
 ]
 
 resolver = "2"
