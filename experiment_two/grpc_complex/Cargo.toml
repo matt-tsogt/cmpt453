@@ -1,0 +1,11 @@
+[package]
+name = "grpc_complex"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+main = { version = "0.1.0", path = "../../main" }
+tokio.workspace = true
+tonic.workspace = true
+futures-core.workspace = true
+async-stream.workspace = true

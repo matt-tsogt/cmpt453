@@ -1,9 +1,0 @@
-[package]
-name = "grpc"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-main = { version = "0.1.0", path = "../main" }
-tokio = { version = "1.48.0", features = ["macros", "rt-multi-thread"] }
-tonic = { version = "0.14.2", features = ["transport"] }

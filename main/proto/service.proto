@@ -2,18 +2,67 @@ syntax = "proto3";
 
 package service;
 
-// Request message
-message PingRequest {
+// for simple payload
+message SimpleRequest {
   string message = 1;
 }
-
-// Response message
-message PingResponse {
+message SimpleResponse {
   string message = 1;
   int64 timestamp = 2;
 }
+service SimpleService {
+  rpc SimplePing (SimpleRequest) returns (SimpleResponse);
+  rpc SimpleClientStream (stream SimpleRequest) returns (SimpleResponse);
+  rpc SimpleServerStream (SimpleRequest) returns (stream SimpleResponse);
+  rpc SimpleStream (stream SimpleRequest) returns (stream SimpleResponse);
+}
 
-// Service definition
-service Service {
-  rpc Ping(PingRequest) returns (PingResponse);
+
+
+// for complex payload  
+message Contact {
+  string email = 1;
+  string phone = 2;
+}
+message Owner {
+  uint32 id = 1;
+  string name = 2;
+  Contact contact = 3;
+}
+message Coordinates {
+  double lat = 1;
+  double lng = 2;
+}
+message Building {
+  string name = 1;
+  string city = 2;
+  Coordinates coordinates = 3;
+}
+
+message ComplexRequest {
+  string project_id = 1;
+  string name = 2;
+  string created_at = 3;
+  Owner owner = 4;
+  Building building = 5;
+  repeated double readings = 6;
+  map<string, string> tags = 7;
+}
+
+message ComplexResponse {
+  string project_id = 1;
+  string name = 2;
+  string created_at = 3;
+  Owner owner = 4;
+  Building building = 5;
+  repeated double readings = 6;
+  map<string, string> tags = 7;
+}
+
+
+service ComplexService {
+  rpc ComplexPing        (ComplexRequest)               returns (ComplexResponse);
+  rpc ComplexClientStream(stream ComplexRequest)        returns (ComplexResponse);
+  rpc ComplexServerStream(ComplexRequest)               returns (stream ComplexResponse);
+  rpc ComplexStream      (stream ComplexRequest)        returns (stream ComplexResponse);
 }

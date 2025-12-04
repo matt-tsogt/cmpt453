@@ -1,0 +1,11 @@
+[package]
+name = "rest_simple"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum.workspace = true
+main = { version = "0.1.0", path = "../../main" }
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
